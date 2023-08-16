@@ -2,6 +2,7 @@
 1. create a database called university_data
 2. edit ./include/db.php and change the password to your database password
 3. import the .sql file in db folder via phpmyadmin into your university_data database;
+4. my name
 
 
 #login detals
