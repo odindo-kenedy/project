@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="Description" content="Enter your description here"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+<title>Title</title>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row"></div>
+        <div class="row">
+            <div class="main">
+                <p><?php 
+                
+                $query = "select * from students where id='${userid}'";
+                $execute = mysqli_query($conn, $query);
+                while ($DataRows = mysqli_fetch_array($execute)) {
+                    $firstname = $DataRows['first_name'];
+                    $lastname = $DataRows['last_name'];
+                }
+                echo "Welcome Mr/Mrs ${firstname} ${lastname}";
+        
+                
+                ?></p>
+                
+                <h2 class="center" id="studentdata"><u> Students Data</u></h2>
+                <table class="table table-responsive" border="1">
+                    <tr>
+                    <th>s/no</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Student Id</th>
+                    <th>Balance</th>
+                    <th>password</th>
+                    <th>last modified</th>
+                    <th>stage</th>
+                    <?php
+                    $query = "select * from students";
+                    $data = mysqli_query($conn, $query);
+                    $count = 0;
+                    while ($DataRows = mysqli_fetch_array($data)) {
+                        $Id = $DataRows['id'];
+                        $DateTime1 = $DataRows['datetime'];
+                        $firstname = $DataRows['first_name'];
+                        $lastname = $DataRows['last_name'];
+                        $studentid = $DataRows['student_id'];
+                        $upassword = $DataRows['password'];
+                        $balance = $DataRows['balance'];
+                        $course = $DataRows['course'];
+                        $semester = $DataRows['semester'];
+                        $count++;
+        
+        
+        
+        
+                        ?>
+                
+                </tr>
+                <tr>
+                    <td><?php echo $count; ?></td>
+                    <td><?php echo $firstname; ?></td>
+                    <td><?php echo $lastname; ?></td>
+                    <td><?php echo $studentid; ?></td>
+                    <td><?php echo $balance; ?></td>
+                    <td><?php echo $upassword; ?></td>
+                    <td><?php echo $DateTime1; ?></td>
+                    <td><?php echo $semester; ?></td>
+                      
+                </tr>
+                <?php } ?>
+                </table><hr>
+                
+                <h2 class="center"><u>Grades</u></h2>
+                <table class="table table-responsive table-bordered table-hover" border="1">
+                    <tr>
+                        <th>s/no</th>
+                        <th>student Id</th>
+                        <th>unit</th>
+                        <th>grade</th>
+                        <th>time modified</th>
+                        
+                    </tr>
+                    <?php
+                    $query = "select * from course";
+                    $data1 = mysqli_query($conn, $query);
+                    $count = 0;
+                    while ($DataRows = mysqli_fetch_array($data1)) {
+                        $Id = $DataRows['id'];
+                        $unit = $DataRows['unit'];
+                        $grade = $DataRows['grade'];
+                        $studentid1 = $DataRows['student_id'];
+                        $DateTime1 = $DataRows['datetime'];
+                        $count++;
+        
+                        ?>
+                    <tr>
+                        <td><?php echo $count; ?></td>
+                        <td><?php echo $studentid1; ?></td>
+                        <td><?php echo $unit; ?></td>
+                        <td><?php echo $grade; ?></td>
+                        <td><?php echo $DateTime1; ?></td>
+                    </tr>
+                    <?php }}?>
+                </table>
+            
+            <hr>
+            <!--add data section-->
+            <div class="add" id="addtocourse">
+                <?php
+                if(isset($_POST['entry'])){
+                    $gradesubmit = $_POST['unit_grade'];
+                    $courseselect = $_POST['course'];
+                    $studentid1 = $_POST['studentid'];
+        
+                    $query = "INSERT INTO course(unit,grade,student_id, datetime) VALUE ('${courseselect}',$gradesubmit,'${studentid1}','${DateTime}')";
+                    $execute = mysqli_query($conn, $query);
+                    $_SESSION["SuccessMessage"]="data added successfuly";
+                        echo SuccessMessage();
+                }
+                ?>
+                
+                <h2 class="center"><u>Add data to course</u></h2>
+                <form action="#" method="post">
+                    <label for="studentid" class="labels">Student Id</label>
+                    <input class="form-control" type="text" name="studentid" id="studentid">
+                    <label for="course" class="labels">course</label>
+                    
+                    <select class="form-control" name="course" id="course" style="width:23%;">
+                    
+                    <?php 
+                        
+                        $viewquerry= "SELECT * FROM units";
+                        $Execute = mysqli_query($conn,$viewquerry);
+                        while ($datarows = mysqli_fetch_array($Execute)){
+                            $unit=$datarows["unit"];
+                        ?>
+                        <option>
+                        <?php echo $unit; ?>
+                        </option>
+                        <?php }?>
+                    </select>
+                    
+                    <label for="unit_grade" class="labels">Grade</label>
+                    <input class="form-control" type="text" name="unit_grade" id="unit_grade"><br>
+                    <input type="submit" value="Post"  name="entry" class="btn btn-primary btn-block">
+                </form>
+            </div>
+            <!--edit data-->
+            <h2 class="center"><u> Edit Data</u></h2>
+        
+            <div class="loader">
+                <form action="#" method="post">
+                   
+                    <label for="username" class="labels">student id</label>
+                    <input type="text" name="username" id="username">
+                    <input type="submit" value="load data(Refresh site)" name="loader">
+                </form>
+            </div>
+            <div class="form1">
+                <!--array data from the edited data, looped input forms-->
+                <?php
+                if(isset($_POST['edited'])){
+                    
+                    foreach($_POST['grade1'] as $gradearray){
+                        foreach ($_POST['idarray'] as $gradeid) {
+                            $query1 = "UPDATE `course` SET `grade` = '${gradearray}', `datetime` = '${DateTime}' WHERE `id` = $gradeid";
+                            $execute = mysqli_query($conn, $query1);
+                            
+                        }
+                    }
+        
+                        
+        
+                    
+        
+                }
+                
+                ?>
+                <form action="#" method="post">
+                    <input class="form-control" type="text" value="<?php echo $_POST['username'];?>" disabled>
+        
+                <?php
+                if (isset($_POST['username'])) {
+                    $search = $_POST['username'];
+                    $query = "select * from course where student_id='${search}'";
+                    $data1 = mysqli_query($conn, $query);
+                    while ($DataRows = mysqli_fetch_array($data1)) {
+                        $Id = $DataRows['id'];
+                        $unit = $DataRows['unit'];
+                        $grade = $DataRows['grade'];
+                        $studentid1 = $DataRows['student_id'];
+                        $DateTime1 = $DataRows['datetime'];
+        
+        
+        
+                        ?>
+                    
+                    <label for="grade1" class="labels">unit</label>
+                    <input class="form-control" type="text" name="idarray[]" disabled value="<?php echo $Id; ?>">
+                    <input class="form-control" type="text" disabled value="<?php echo $unit; ?>">
+                    
+                    <input class="form-control" type="text" name="grade1[]" id="grade1" value="<?php echo $grade; ?>"><!--the looped forms to store data in an array-->
+                    <?php }
+                }?>
+                   
+                    <br><input type="submit" value="Add to db" class="btn btn-primary btn-block" name="edited"><!--disabled for now-->
+                </form>
+                
+            </div>
+            <div class="add_course">
+                <?php
+                if (isset($_POST['add'])){
+                    $addcourse= $_POST['course'];
+                    $query = "INSERT INTO units(unit,datetime) VALUE ('${addcourse}','${DateTime}')";
+                    $Execute = mysqli_query($conn, $query);
+                    $_SESSION["SuccessMessage"]="New course added successfuly";
+                    echo SuccessMessage();
+        
+                    
+        
+                }
+                ?>
+                <h2 class="center"><u>Add Courses category</u></h2>
+                <form method="post" action="#">
+                    <label for="course" class="labels">course to add</label>
+                    <input class="form-control"  type="text" name="course" id="course"><br>
+                    <input type="submit" name="add" value="add" class="btn btn-primary btn-block">
+                </form>
+        
+            </div>
+            <!--Administration list and users-->
+            <div>
+                <h2 class="center"><u>administration list</u> </h2>
+                <table border="1">
+                    <tr>
+                    <th>s/no</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Admin Id</th>
+                    <th>password</th>
+                    <th>last modified</th>
+                    <?php
+                    $query = "select * from students where user=1";
+                    $data = mysqli_query($conn, $query);
+                    $count = 0;
+                    while ($DataRows = mysqli_fetch_array($data)) {
+                        $Id = $DataRows['id'];
+                        $DateTime1 = $DataRows['datetime'];
+                        $firstname = $DataRows['first_name'];
+                        $lastname = $DataRows['last_name'];
+                        $studentid = $DataRows['student_id'];
+                        $upassword = $DataRows['password'];
+                        $semester = $DataRows['semester'];
+                        $count++;
+        
+        
+        
+        
+                        ?>
+                
+                </tr>
+                <tr>
+                    <td><?php echo $count; ?></td>
+                    <td><?php echo $firstname; ?></td>
+                    <td><?php echo $lastname; ?></td>
+                    <td><?php echo $studentid; ?></td>
+                    <td><?php echo $upassword; ?></td>
+                    <td><?php echo $DateTime1; ?></td>
+                      
+                </tr>
+                <?php } ?>
+                </table><hr>
+                
+                <div class="signup">
+                <h2>add new admins</h2>
+                <!--new users with admin priviledges-->
+                <!--code for the signup form-->
+                <?php
+                if (isset($_POST['signup'])) {
+                    $username = $_POST['username'];
+                    $password = $_POST['password'];
+                    $firstname = $_POST['fname'];
+                    $lastname = $_POST['lname'];
+                    $course = "Administration";
+                    $user = 1; /*admin is 1 =student =0 */
+                    $query = "insert into students(first_name,last_name,student_id,password, course,datetime,user)value('${firstname}', '${lastname}','${username}','${password}','${course}','${DateTime}','${user}')";
+                    $execute = mysqli_query($conn, $query);
+                    
+                    $_SESSION["SuccessMessage"]="account created successfuly";
+                    
+                    echo SuccessMessage();
+                    
+                    echo "student ID <b>:${username} </b><br>";
+                    echo "firstname: <b>${firstname} </b><br>";
+                    echo "lastname: <b>${lastname} </b><br>";
+        
+                    echo "registered course : ${course} <br>";
+                }
+                ?>
+                <!--end of the signup code-->
+                <form action="#" method="post">
+                    <label for="username" class="labels">student ID</label>
+                    <input class="form-control" type="text" name="username" id="username">
+                    <label for="fname" class="labels">First name</label>
+                    <input class="form-control" type="text" name="fname" id="fname">
+                    <label for="lname" class="labels">Last name</label>
+                    <input class="form-control" type="text" name="lname" id="lname">
+                    <label for="password" class="labels">password</label>
+                    <input class="form-control" type="password" name="password" id="password">
+                    <label for="c_password" class="labels">confirm password</label>
+                    <input class="form-control" type="password" name="c_password" id="c_password" onkeyup="validate_password()">
+                    <span id="wrong_pass_alert" style="font-size:20px ;"></span><br>
+                    <input  type="submit" value="add admin" class="btn btn-primary btn-block" name="signup" id="btn"><br>
+                    
+        
+                </form>
+            </div>
+                        
+            </div>
+        </div>
+    </div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
+</body>
+</html>

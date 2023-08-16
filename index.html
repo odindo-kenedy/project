@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="Description" content="Enter your description here" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <title>login screen</title>
+    <style>
+        body {
+            background-image: url(./assets/images/graduation\ photo3.jpg);
+            background-position: bottom;
+        }
+        
+        .col-sm-4 {
+            position: absolute;
+            left: 30%;
+            top: 20%;
+            background-image: linear-gradient(to left, rgba(196, 166, 36, 0.5), rgba(21, 21, 194, 50%));
+        }
+        
+        @media screen and (max-width: 600px) {
+            .col-sm-4 {
+                position: absolute;
+                left: 0%;
+                top: 20%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="nav position-fixed">
+                <ul class="nav bg-white" style="width: 100%;">
+                    <a href="./index.html">
+                        <li class="nav-link">Home</li>
+                    </a>
+                    <a href="./index.html">
+                        <li class="nav-link">login</li>
+                    </a>
+                    <a href="./signup.html">
+                        <li class="nav-link">sign up</li>
+                    </a>
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="form text-light">
+                    <form action="submit.php" method="post">
+                        <h1 class="center">Access college</h1>
+                        <hr>
+                        <h4 class="center">Login form</h4>
+                        <hr>
+                        <label for="username" class="labels">student ID</label>
+                        <input type="text" name="username" id="username" class="form-control">
+                        <label for="password" class="labels">password</label>
+                        <input type="password" name="password" id="password" class="form-control">
+                        <br>
+                        <input type="submit" value="login" class="btn btn-primary btn-block" name="login"><br>
+                        <p>Cannot remember password <a href="forgot.html">forgot password!? </a><br> Don't have an account? <a href="./signup.html">sign up</a>
+
+                    </form>
+                </div>
+
+            </div>
+            <div class="footer bg-dark position-fixed text-light text-center" style="bottom: 0%;width: 100%;">
+                <p>copyright &copy; Catherine Khavetsa All rights reserved &trade; </p>
+            </div>
+        </div>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.slim.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
+</body>
+
+</html>

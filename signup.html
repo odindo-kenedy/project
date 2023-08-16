@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="Description" content="Enter your description here" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <title>signup</title>
+</head>
+<style>
+    body {
+        background-image: url(./assets/images/graduation\ photo3.jpg);
+        background-position: bottom;
+    }
+    
+    .col-sm-4 {
+        left: 30%;
+        top: 20%;
+        background-image: linear-gradient(to left, rgba(196, 166, 36, 0.5), rgba(21, 21, 194, 50%));
+    }
+    
+    @media screen and (max-width: 600px) {
+        .col-sm-4 {
+            position: absolute;
+            left: 0%;
+            top: 20%;
+        }
+    }
+</style>
+
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="nav position-fixed">
+                <ul class="nav bg-white" style="width: 100%;">
+                    <a href="./index.html">
+                        <li class="nav-link">Home</li>
+                    </a>
+                    <a href="./index.html">
+                        <li class="nav-link">login</li>
+                    </a>
+                    <a href="./signup.html">
+                        <li class="nav-link">sign up</li>
+                    </a>
+                </ul>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="signup col-sm-4">
+                <form action="submit.php" class="text-white" method="post">
+                    <h1 class="center">Access college</h1>
+                    <hr>
+                    <h4 class="center">signup new user</h4>
+                    <hr>
+                    <label for="username" class="labels">student ID</label>
+                    <input type="text" name="username" id="username" class="form-control">
+                    <label for="fname" class="labels">First name</label>
+                    <input type="text" name="fname" id="fname" class="form-control">
+                    <label for="lname" class="labels">Last name</label>
+                    <input type="text" name="lname" id="lname" class="form-control">
+                    <label for="course" class="labels">course</label>
+                    <input type="text" name="course" id="course" class="form-control">
+                    <label for="password" class="labels">password</label>
+                    <input type="password" name="password" id="password" class="form-control">
+                    <label for="c_password" class="labels">confirm password</label>
+                    <input type="password" name="c_password" id="c_password" class="form-control" onkeyup="validate_password()">
+                    <span id="wrong_pass_alert"></span><br>
+                    <input type="submit" value="sign up" class="btn btn-primary btn-block" name="signup" id="btn"><br>
+                    <p><br> Already have an account? <a href="./login.html">login</a></p>
+
+
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
+</body>
+
+</html>

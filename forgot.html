@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>student forgot password</title>
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <script src="./assets/js/index.js"></script>
+</head>
+<body class="body">
+    <div class="navigation">
+        <ul>
+            <a href="./index.html"><li>Home</li></a>
+            <a href="./login.html"><li>login</li></a>
+            <a href="./index.html"><li>sign up</li></a>
+        </ul>
+    </div>
+    <div class="form">
+        <form action="submit.php" method="post">
+            <h1 class="center">Access University</h1>
+            <hr>
+            <h4 class="center">Forgot Password</h4>
+            <hr>
+            <label for="username" class="labels">student ID</label>
+            <input type="text" name="username" id="username">
+            <label for="password" class="labels">password</label>
+            <input type="password" name="password" id="password">
+            <label for="c_password" class="labels">confirm password</label>
+            <input type="password" name="c_password" id="c_password" onkeyup="validate_password()">
+            <span id="wrong_pass_alert"></span>
+            <input type="submit" value="Reset Password" class="btn" name="forgot" id="btn"><br>
+            
+
+        </form>
+    </div>
+    
+</body>
+</html>
